@@ -1,3 +1,2 @@
 # to update wsl on Saturn, run these weekly (at least)
-sudo apt update
-sudo apt upgrade
+sudo apt update && sudo apt upgrade && sudo apt autoremove

@@ -1,2 +1,27 @@
 # to update wsl on Saturn, run these weekly (at least)
 sudo apt update && sudo apt upgrade && sudo apt autoremove
+
+# See: https://cloud.google.com/sdk/docs/install#deb
+sudo apt install nodejs
+ sudo apt install gcloud
+ sudo apt-get install apt-transport-https ca-certificates gnupg
+ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+ sudo apt-get update && sudo apt-get install google-cloud-cli
+ gcloud init 
+ # input: readngtndude@gmail.com, NodeJSTutorial
+ 
+ # See: https://github.com/nvm-sh/nvm#git-install
+ cd ~/
+ git clone https://github.com/nvm-sh/nvm.git .nvm
+ cd .nvm
+ git checkout v0.39.1
+ . ./nvm.sh
+ cat > ~/.bashrc <<!
+ export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+!
+
+ # This needs more!
+ 

@@ -25,5 +25,8 @@ sudo apt install nodejs
 
 nvm install --lts
 
+# to make sure we have node, run the following before doing anything.
+nvm use node
+
  # This needs more!
  

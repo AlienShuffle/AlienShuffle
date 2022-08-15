@@ -4,19 +4,24 @@ cd ~
 echo 'sudo apt update && sudo apt upgrade && sudo apt autoremove' > bin/run-updates && chmod +x bin/run-updates
 bin/run-updates
 
-# Install Node.js
-sudo apt install nodejs
+
 
 #
 # Install Google Cloud CLI
 #   See: https://cloud.google.com/sdk/docs/install#deb
-sudo apt install gcloud
+# this did not work! - sudo apt install gcloud
 sudo apt-get install apt-transport-https ca-certificates gnupg
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 sudo apt-get update && sudo apt-get install google-cloud-cli
 gcloud init 
-# input: readngtndude@gmail.com, NodeJSTutorial
+# input: readngtndude@gmail.com (via Chrome/Google login), Choose project: NodeJSTutorial
+# HELP
+# * Run `gcloud --help` to see the Cloud Platform services you can interact with. And run `gcloud help COMMAND` to get help on any gcloud command.
+# * Run `gcloud topic --help` to learn about advanced features of the SDK like arg files and output formatting
+# * Run `gcloud cheat-sheet` to see a roster of go-to `gcloud` commands.
+
+**** NEED TO CONTINUE HERE
 
 #
 # Install Node Version Manager (NVM)
@@ -33,9 +38,11 @@ export NVM_DIR="$HOME/.nvm"
 !
 # this installs the LTS version of Node.js
 nvm install --lts
+
 # to make sure we have node, run the following before doing anything.
 nvm use node
-
+# Install Node.js
+sudo apt install nodejs
 #
 # Install github CLI!
 #   See https://github.com/cli/cli/blob/trunk/docs/install_linux.md

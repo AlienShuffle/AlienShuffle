@@ -55,4 +55,19 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 sudo apt update
 sudo apt install gh
 
+#
+# create an ssh key for use with github
+#
+ssh-keygen -t ed25519 -C "readngtndude@gmail.com"
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+# follow these instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
+
+#
+# now clone the NodeTutorial to get started.
+#   https://cli.github.com/manual/gh_repo
+#
+gh auth login
+gh repo clone AlienShuffle/NodeTutorial
+
 **** NEED TO CONTINUE HERE on saturn

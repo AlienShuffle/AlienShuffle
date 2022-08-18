@@ -21,7 +21,7 @@ gcloud init
 # * Run `gcloud topic --help` to learn about advanced features of the SDK like arg files and output formatting
 # * Run `gcloud cheat-sheet` to see a roster of go-to `gcloud` commands.
 
-**** NEED TO CONTINUE HERE
+**** NEED TO CONTINUE HERE on mars
 
 #
 # Install Node Version Manager (NVM)
@@ -41,8 +41,11 @@ nvm install --lts
 
 # to make sure we have node, run the following before doing anything.
 nvm use node
-# Install Node.js
-sudo apt install nodejs
+# run node to see if it brings back the version set above.
+node --version
+# Install Node.js if you don't want to use nvm (this does not seem necessary)
+#sudo apt install nodejs
+
 #
 # Install github CLI!
 #   See https://github.com/cli/cli/blob/trunk/docs/install_linux.md
@@ -52,3 +55,4 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githu
 sudo apt update
 sudo apt install gh
 
+**** NEED TO CONTINUE HERE on saturn

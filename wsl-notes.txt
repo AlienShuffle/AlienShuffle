@@ -21,8 +21,6 @@ gcloud init
 # * Run `gcloud topic --help` to learn about advanced features of the SDK like arg files and output formatting
 # * Run `gcloud cheat-sheet` to see a roster of go-to `gcloud` commands.
 
-**** NEED TO CONTINUE HERE on mars
-
 #
 # Install Node Version Manager (NVM)
 #   See: https://github.com/nvm-sh/nvm#git-install
@@ -31,7 +29,7 @@ git clone https://github.com/nvm-sh/nvm.git .nvm
 cd .nvm
 git checkout v0.39.1
 . ./nvm.sh
-cat > ~/.bashrc <<!
+cat >> ~/.bashrc <<!
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -45,6 +43,9 @@ nvm use node
 node --version
 # Install Node.js if you don't want to use nvm (this does not seem necessary)
 #sudo apt install nodejs
+
+
+
 
 #
 # Install github CLI!
@@ -71,3 +72,4 @@ gh auth login
 gh repo clone AlienShuffle/NodeTutorial
 
 **** NEED TO CONTINUE HERE on saturn
+**** NEED TO CONTINUE HERE on mars

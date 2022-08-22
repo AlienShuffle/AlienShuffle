@@ -5,7 +5,9 @@ gh auth login
 gh repo clone AlienShuffle/NodeTutorial
 
 # use git commands like commit, push, etc. to maintain the repo with GH.
-
+git add file1 file2
+git commmit -m 'message'
+git push
 
 # Using gcloud command submit a Google Cloud Function from this repository into the Google Cloud account.
 # used to configure login to the GCF account, this also sets the project

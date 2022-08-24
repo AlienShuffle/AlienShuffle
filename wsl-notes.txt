@@ -1,20 +1,20 @@
 #
 # setup script do regular Ubunto updates, run these weekly (at least), I guess there could be a chron job here.
+#
 cd ~
 echo 'sudo apt update && sudo apt upgrade && sudo apt autoremove' > bin/run-updates && chmod +x bin/run-updates
 bin/run-updates
 
-
-
 #
 # Install Google Cloud CLI
+#
 #   See: https://cloud.google.com/sdk/docs/install#deb
-# this did not work! - sudo apt install gcloud
 sudo apt-get install apt-transport-https ca-certificates gnupg
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
 sudo apt-get update && sudo apt-get install google-cloud-cli
 gcloud init 
+
 # input: readngtndude@gmail.com (via Chrome/Google login), Choose project: NodeJSTutorial
 # HELP
 # * Run `gcloud --help` to see the Cloud Platform services you can interact with. And run `gcloud help COMMAND` to get help on any gcloud command.
@@ -24,6 +24,7 @@ gcloud init
 #
 # Install Node Version Manager (NVM)
 #   See: https://github.com/nvm-sh/nvm#git-install
+#
 cd ~/
 git clone https://github.com/nvm-sh/nvm.git .nvm
 cd .nvm
@@ -45,11 +46,10 @@ node --version
 #sudo apt install nodejs
 
 
-
-
 #
 # Install github CLI!
 #   See https://github.com/cli/cli/blob/trunk/docs/install_linux.md
+#
 curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
 sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null

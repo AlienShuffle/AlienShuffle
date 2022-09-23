@@ -16,3 +16,9 @@ gcloud init
 # Deploy a Cloud Function called helloWorld into the curent project
 # don't know why but only worked when I named the .js file function.js
 gcloud functions deploy 'testfunc' --runtime nodejs12 --trigger-http --entry-point=helloWorld
+
+#
+# add a test harness for GCF on a local node instance
+npm install @google-cloud/functions-framework
+
+# and add this to the package.json file (see Treasury/package.json)

@@ -65,11 +65,11 @@ ssh-add ~/.ssh/id_ed25519
 # follow these instructions: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account
 
 #
-# now clone the NodeTutorial to get started.
+# now clone the CashAnalyzer to get started.
 #   https://cli.github.com/manual/gh_repo
 #
 gh auth login
-gh repo clone AlienShuffle/NodeTutorial
+gh repo clone AlienShuffle/CashAnalyzer
 
 **** NEED TO CONTINUE HERE on saturn
 **** NEED TO CONTINUE HERE on mars

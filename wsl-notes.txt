@@ -1,9 +1,9 @@
 #
-# setup script do regular Ubunto updates, run these weekly (at least), I guess there could be a chron job here.
+# setup script do regular Ubuntu updates, run these weekly (at least), I guess there could be a chron job here.
 #
 cd ~
-echo 'sudo apt update && sudo apt upgrade && sudo apt autoremove' > bin/run-updates && chmod +x bin/run-updates
-bin/run-updates
+echo 'sudo apt update && sudo apt upgrade && sudo apt autoremove' > bin/run-updates.bash && chmod +x bin/run-updates.bash
+bin/run-updates.bash
 
 #
 # Install Google Cloud CLI

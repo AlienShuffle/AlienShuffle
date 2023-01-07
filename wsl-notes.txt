@@ -6,6 +6,11 @@ echo 'sudo apt update && sudo apt upgrade && sudo apt autoremove' > bin/run-upda
 bin/run-updates.bash
 
 #
+# make sure we have git
+#
+sudo apt install git-all
+
+#
 # Install Google Cloud CLI
 #
 #   See: https://cloud.google.com/sdk/docs/install#deb

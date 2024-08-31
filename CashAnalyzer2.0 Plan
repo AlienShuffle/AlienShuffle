@@ -4,3 +4,4 @@ Spme thoughts.
 2.) need a scheme to deploy this to two target platforms:
  - my raspberry pi
  - one or both of my windows PC WSL platforms.
+3.) need a scheme to retrieve the data structure for 

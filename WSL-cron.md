@@ -1,6 +1,12 @@
+Configure WSL on Win11 to automically start cron
+---
+This provides guidance on how to start cron automatically upon boot or a WSL instance. It has limitations
+- It does not actually start WSL upon boot of the Windows instance, you need to launch a WSL process (e.g., wsl.exe) to get the Linux instance running.
+- All attempts at getting it to run and stay running automatically have failed, just need topo 
+
 On the Windows 11 Box, assuming a currently supported version of WSL is installed, you need to do the following:
 
--Create a file /etc/wsl.conf with the following content:
+- Create a file /etc/wsl.conf with the following content:
 ```
 [boot]
 systemd=true
@@ -15,6 +21,10 @@ command="service cron start"
 ```
 
 - Create a one line cronstart.sh script for end-user help if desired:
-```
+```bash
 sudo echo '/usr/sbin/service cron start' > /usr/local/bin/cronstart.sh ; chmod +x /usr/local/bin/cronstart.sh
+```
+- Create a one line cronstatus.sh script for end-user help if desired:
+```bash
+sudo echo '/usr/sbin/service cron status' > /usr/local/bin/cronstatus.sh ; chmod +x /usr/local/bin/cronstatus.sh
 ```

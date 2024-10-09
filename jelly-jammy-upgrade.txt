@@ -1,7 +1,0 @@
-run-updates
-# look latestdistribution upgrade is available.
-sudo apt dist-upgrade
-# ensure we have latest update mananger
-sudo apt install update-manager-core
-# runs the actuall update
-sudo do-release-upgrade -d

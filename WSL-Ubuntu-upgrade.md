@@ -19,7 +19,7 @@ Restart Ubuntu to complete process
 wsl --terminate Ubuntu
 wsl
 ```
-# old 20.4 to 22.4 update process
+# old 20.04 to 22.04 update process
 ```
 run-updates
 # look latestdistribution upgrade is available.

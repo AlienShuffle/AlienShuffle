@@ -1,7 +1,0 @@
-Spme thoughts.
-
-1.) need to build a working client-side only node.js / puppeteer app that retrieves raw data from websites.
-2.) need a scheme to deploy this to two target platforms:
- - my raspberry pi
- - one or both of my windows PC WSL platforms.
-3.) need a scheme to retrieve the data structure for 

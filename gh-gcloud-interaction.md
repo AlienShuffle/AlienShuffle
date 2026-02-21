@@ -1,4 +1,5 @@
-# Authenticate the login to the account.
+# Github / Google Cloud Interactions.
+Authenticate the login to the Github account
 ```
 gh auth login
 ```

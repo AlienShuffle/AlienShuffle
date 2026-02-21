@@ -2,7 +2,7 @@ Configure WSL on Win11 to automically start cron
 ---
 This provides guidance on how to start cron automatically upon boot or a WSL instance. It has limitations
 - It does not actually start WSL upon boot of the Windows instance, you need to launch a WSL process (e.g., wsl.exe) to get the Linux instance running.
-- All attempts at getting it to run and stay running automatically have failed, just need do stuff without cron :-(
+- All attempts at getting it to run and stay running automatically have failed, just need do stuff to ensure WSL is manually started every time Windows host reboots :-(
 
 On the Windows 11 Box, assuming a currently supported version of WSL is installed, you need to do the following:
 

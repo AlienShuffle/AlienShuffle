@@ -11,9 +11,16 @@ This repository also holds all my bootstrapping scripts for setting up new Linux
 
 Some sample (still to be verified) steps to initialize a new WSL instance.
 ```
+wsl --install -d Ubuntu-24.04
+wsl --export Ubuntu C:\WSL\ubuntu-base.tar
+wsl --import Ubuntu-Prod C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
+wsl --import Ubuntu-Test C:\WSL\Ubuntu-Test C:\WSL\ubuntu-base.tar
 
-wsl --install -d Ubuntu
 wsl -d Ubuntu -- bash -c "~/ubuntu-wsl-env/bootstrap.sh"
+```
+list installed distros:
+```
+wsl.exe --list --verbose
 ```
 <!---
 AlienShuffle/AlienShuffle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

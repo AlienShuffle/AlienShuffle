@@ -4,7 +4,10 @@
 - 🌱 I’m currently learning Node.js, Javascript, Google App Script, Puppeteer and a bit of python, and rust too.
 - 💞️ I’m looking to collaborate on stuff w/ my son.
 - 📫 How to reach me readngtndude@gmail.com
-- I am also the editor of the Bogleheads shared resource call the Money Market Optimizer. this account is used to help build some of the backend. I will be fully including the project here under the CashAnaylzer project.
+- I am also the maintainer of the Bogleheads shared resource call the Money Market Optimizer. this account is used to help build some (now almost all) of the backend. I will be fully including the project here under the CashAnaylzer project.
+
+# Bootstrapping
+This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
 <!---
 AlienShuffle/AlienShuffle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

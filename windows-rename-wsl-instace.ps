@@ -1,0 +1,15 @@
+function Rename-WSLDistro {
+    param(
+        [string]$OldName,
+        [string]$NewName,
+        [string]$BaseDir = "C:\WSL"
+    )
+
+    $Tar = "$BaseDir\$OldName-rename.tar"
+    $NewPath = "$BaseDir\$NewName"
+
+    wsl --export $OldName $Tar
+    wsl --unregister $OldName
+    New-Item -ItemType Directory -Path $NewPath -Force | Out-Null
+    wsl --import $NewName $NewPath $Tar
+}

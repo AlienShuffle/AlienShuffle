@@ -1,3 +1,5 @@
 curl
 git
+jq
 npm
+tree

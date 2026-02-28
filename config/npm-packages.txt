@@ -1,0 +1,5 @@
+fast-xml-parser
+node-html-parser
+puppeteer
+@google-cloud/functions-framework
+@google/clasp 

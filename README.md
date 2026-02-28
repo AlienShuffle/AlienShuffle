@@ -9,6 +9,12 @@
 # Bootstrapping
 This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
+Some sample (still to be verified) steps to initialize a new WSL instance.
+```
+
+wsl --install -d Ubuntu
+wsl -d Ubuntu -- bash -c "~/ubuntu-wsl-env/bootstrap.sh"
+```
 <!---
 AlienShuffle/AlienShuffle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 You can click the Preview link to take a look at your changes.

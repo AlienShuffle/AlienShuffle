@@ -12,7 +12,7 @@ This repository also holds all my bootstrapping scripts for setting up new Linux
 Some sample (still to be verified) steps to initialize a new WSL instance.
 ```
 wsl --install -d Ubuntu-24.04
-wsl --export Ubuntu C:\WSL\ubuntu-base.tar
+wsl --export Ubuntu-24.04 C:\WSL\ubuntu-base.tar
 wsl --import Ubuntu-Prod C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
 wsl --import Ubuntu-Test C:\WSL\Ubuntu-Test C:\WSL\ubuntu-base.tar
 

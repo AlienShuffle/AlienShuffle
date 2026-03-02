@@ -1,0 +1,12 @@
+foxundermoon.shell-format
+github.copilot-chat
+google.geminicodeassist
+mechatroner.rainbow-csv
+ms-dotnettools.csdevkit
+ms-dotnettools.csharp
+ms-dotnettools.vscode-dotnet-runtime
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance
+ms-python.vscode-python-envs
+redhat.vscode-xml

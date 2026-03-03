@@ -3,6 +3,14 @@ set -e
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+if ! sudo -n true 2>/dev/null; then
+  echo "This bootstrap requires passwordless sudo."
+  echo "Run once in this environment: sudo visudo"
+  echo "Then add the following line to the end of the file"
+  echo 'yourusername ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt'
+  exit 1
+fi
+
 # install a ubuntu packages required by my environment.
 if [ ! -f "$REPO_ROOT"/config/apt-packages.txt ]; then
   echo "Package list not found: $REPO_ROOT/config/apt-packages.txt"
@@ -28,6 +36,13 @@ fi
 echo "=== Installing npm packages ==="
 xargs -a "$REPO_ROOT"/config/npm-packages.txt npm install -g
 npm outdated -g || npm update -g
+
+if [ ! -f "$REPO_ROOT"/config/vscode-extensions.txt ]; then
+  echo "VS Code extensions list not found: $REPO_ROOT/config/vscode-extensions.txt"
+  exit 1
+fi
+echo "=== Installing VS Code extensions ==="
+xargs -a "$REPO_ROOT"/config/vscode-extensions.txt code --install-extension
 
 # install all bash scripts in ~/bin
 echo "=== Installing ~/bin scripts ==="

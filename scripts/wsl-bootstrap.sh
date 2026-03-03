@@ -5,6 +5,14 @@
 # 
 set -euo pipefail
 
+if ! sudo -n true 2>/dev/null; then
+  echo "This bootstrap requires passwordless sudo."
+  echo "Run once in this environment: sudo visudo"
+  echo "Then add the following line to the end of the file"
+  echo 'yourusername ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt'
+  exit 1
+fi
+
 REPO_URL="https://github.com/AlienShuffle/AlienShuffle.git"
 TARGET_DIR="$HOME/bootstrap"
 

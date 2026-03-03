@@ -11,12 +11,26 @@ This repository also holds all my bootstrapping scripts for setting up new Linux
 
 Some sample (still to be verified) steps to initialize a new WSL instance.
 ```
-wsl --install -d Ubuntu-24.04
-wsl --export Ubuntu-24.04 C:\WSL\ubuntu-base.tar
-wsl --import Ubuntu-Prod C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
-wsl --import Ubuntu-Test C:\WSL\Ubuntu-Test C:\WSL\ubuntu-base.tar
+wsl.exe --install -d Ubuntu-24.04
+wsl.exe --export Ubuntu-24.04 C:\WSL\ubuntu-base.tar
+wsl.exe --import Master C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
+wsl.exe --import Cash-Prod C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
+wsl.exe --import Cash-Test C:\WSL\Ubuntu-Test C:\WSL\ubuntu-base.tar
+```
+Clone this repository into the new Instance
+```
+ wsl.exe -d Cash-Prod -- bash -c "
+        userid=gebelea
+        sudo apt-get update -y &&
+        sudo apt-get install -y git &&
+        if [ ! -d '/home/\$userid/bootstrap/.git' ]; then
+            git clone 'https://github.com/AlienShuffle/AlienShuffle.git' '/home/\$userid/bootstrap'
+        else
+            git -C '$RepoDir' pull --ff-only
+        fi
+    "
 
-wsl -d Ubuntu -- bash -c "~/ubuntu-wsl-env/bootstrap.sh"
+wsl -d Cash-Prod -- bash -c "~/bootstrap/bootstrap.sh"
 ```
 list installed distros:
 ```
@@ -24,7 +38,8 @@ wsl.exe --list --verbose
 ```
 Delete an installed instance:
 ```
- wsl --unregister OldDistroName
+wsl.exe --unregister Cash-Prod
+wsl.exe --unregister Cash-Test
 ```
 <!---
 AlienShuffle/AlienShuffle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

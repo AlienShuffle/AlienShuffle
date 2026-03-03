@@ -8,13 +8,14 @@ if [ ! -f "$REPO_ROOT"/config/apt-packages.txt ]; then
   echo "Package list not found: $REPO_ROOT/config/apt-packages.txt"
   exit 1
 fi
-echo "=== Installing apt packages ==="
+echo "=== updating apt packages ==="
 sudo apt-get update -y
+echo "=== installing/verifying required packages ==="
 xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -y
 
 # install/verify NVM, install LTS NPM instance.
 echo "=== nvm setup ==="
-if ! command -v nvm >/dev/null; then
+if ! command -v ~/.nvm/nvm.sh >/dev/null; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 fi
 source ~/.nvm/nvm.sh

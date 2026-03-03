@@ -17,7 +17,7 @@ else
     echo "Git already installed."
 fi
 
-echo "=== Cloning or updating repository ==="
+echo "=== Cloning or updating bootstrap repository ==="
 if [ ! -d "$TARGET_DIR/.git" ]; then
     echo "Cloning repository into $TARGET_DIR"
     git clone "$REPO_URL" "$TARGET_DIR"

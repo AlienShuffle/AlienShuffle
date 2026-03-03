@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
+#
+# This script is designed to run from powershell or bash source executable as:
+# wsl.exe -d Cash-Prod -e ./wsl-bootstrap.sh
+# 
 set -euo pipefail
 
 REPO_URL="https://github.com/AlienShuffle/AlienShuffle.git"

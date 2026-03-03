@@ -23,17 +23,28 @@ xargs -a config/npm-packages.txt npm install -g
 npm outdated -g || npm update -g
 
 # This works
-for i in dotfiles/.*; do
-  file=$(basename $i)
-  if [ ! -f $file ]; then
-    echo $file missing
-    (
-      cd ..
-      ln -s bootstrap/dotfiles/$file
-    )
-  fi
+
+# install all bash scripts in ~/bin
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SRC_DIR="$REPO_ROOT/bin"
+DEST_DIR="$HOME/bin"
+mkdir -p "$DEST_DIR"
+
+for src in "$SRC_DIR"/*; do
+  [ -x "$src" ] || continue
+  name=$(basename "$src")
+  ln -sf "$src" "$DEST_DIR/$name"
+done
+
+# install dot files in home directory
+SRC_DIR="$REPO_ROOT/dotfiles"
+DEST_DIR="$HOME"
+for src in "$SRC_DIR"/.*; do
+  name=$(basename "$src")
+  ln -sf "$src" "$DEST_DIR/$name"
 done
 
 # git setup.
 git config --global user.email "readngtndude@gmail.com"
 git config --global user.name "AlienShuffle ($WSL_DISTRO_NAME@$(hostname))"
+

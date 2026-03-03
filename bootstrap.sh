@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # install a ubuntu packages required by my environment.
 if [ ! -f config/apt-packages.txt ]; then
   echo "Package list not found: config/apt-packages.txt"

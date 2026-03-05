@@ -1,9 +1,17 @@
 # put WSL name in the prompt.
-if [ -n "${WSL_DISTRO_NAME-}" ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@[\[\033[01;33m\]${WSL_DISTRO_NAME}\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+if [ -n "$WSL_DISTRO_NAME" ] && [ "$WSL_DISTRO_NAME" != "$(hostname)" ]; then
+    echo "=== Set hostname to the WSL instance name, this should only run once. ==="
+    echo "Current hostname: $(hostname)"
+    echo "Setting hostname to: $WSL_DISTRO_NAME"
+    sudo hostnamectl set-hostname "$WSL_DISTRO_NAME"
+    echo "Hostname is now: $(hostname)"
 fi
+
+#if [ -n "${WSL_DISTRO_NAME-}" ]; then
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@[\[\033[01;33m\]${WSL_DISTRO_NAME}\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#else
+#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+#fi
 
 # includes nvm package in shell.
 export NVM_DIR="/home/gebelea/.nvm"

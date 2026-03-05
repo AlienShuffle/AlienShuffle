@@ -1,7 +1,10 @@
 #!/bin/bash
 #
-# This script is designed to run from powershell or bash source executable as:
-# wsl.exe -d Cash-Prod -e ./wsl-bootstrap.sh
+# Run the basic processes required to initialize a WSL instance for use with AlienShuffle.
+# This is designed to be run from powershell or bash source executable as:
+# wsl.exe -d <instance-name> -e ./wsl-run-bootstrap.sh
+# or
+# wsl.exe -d <instance-name> -- bash -s <./wsl-run-bootstrap.sh
 # 
 set -euo pipefail
 

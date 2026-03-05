@@ -1,17 +1,20 @@
 #!/bin/bash
 set -e
-
-User=gebelea
-Instance=Cash-Prod
+[ -z "$1" ] && echo "Usage: $0 <instance-name> [<userid>]" && exit 1
+[ -z "$2" ] && echo "userid=gebelea"
+instance=$1
+userid=${2:-gebelea}
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# -c commands support interactive sudo, so we do here, so that wsl-bootstrap.sh and bootstraps.h can assume passwordless sudo is configured.
-# configure WSL instance to use the current user as default, and allow passwordless sudo for apt commands.
-wsl.exe -d $Instance -- bash -c 'echo -e "[user]\ndefault='$User'" | sudo tee /etc/wsl.conf >/dev/null'
+# -c commands support interactive sudo, so we do here, so that wsl-bootstrap.sh and bootstraps.sh
+# can assume passwordless sudo is configured.
+# Configure WSL instance to use the current user as default.
+wsl.exe -d $instance -- bash -c 'echo -e "[user]\ndefault='$userid'" | sudo tee /etc/wsl.conf >/dev/null'
 
-#allow non-interactive apt calls from default user!
-wsl.exe -d $Instance -- bash \
-    -c 'echo "'$User' ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt" | sudo tee /etc/sudoers.d/cashanalyzer'
+# Allow non-interactive apt calls from default user!
+wsl.exe -d $instance -- bash \
+    -c 'echo "'$userid' ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt" | sudo tee /etc/sudoers.d/cashanalyzer'
 
-wsl.exe -d $Instance -- bash -s <$REPO_ROOT/scripts/wsl-bootstrap.sh
+# kick off the WSL boot strap processes.
+wsl.exe -d $instance -- bash -s <$REPO_ROOT/scripts/wsl-run-bootstrap.sh

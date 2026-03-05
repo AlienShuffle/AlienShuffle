@@ -42,7 +42,19 @@ if [ ! -f "$REPO_ROOT"/config/vscode-extensions.txt ]; then
   exit 1
 fi
 echo "=== Installing VS Code extensions ==="
-xargs -a "$REPO_ROOT"/config/vscode-extensions.txt code --install-extension
+#xargs -a "$REPO_ROOT"/config/vscode-extensions.txt -L 1 code --install-extension
+list_file="$REPO_ROOT/config/vscode-extensions.txt"
+# Cache installed extensions into a fast lookup (exact IDs, one per line)
+installed="$(code --list-extensions)"  # prints one id per line
+# Install only missing
+while IFS= read -r ext || [[ -n "$ext" ]]; do
+  ext=$(echo ${ext%$'\r'} | cut -d@ -f1)                            # strip CR if file is CRLF
+  [[ "$ext" =~ ^[[:space:]]*$ ]] && continue
+  [[ "$ext" =~ ^[[:space:]]*# ]] && continue
+  if ! grep -Fxq "$ext" <<<"$installed"; then
+    code --install-extension "$ext"
+  fi
+done < "$list_file"
 
 # install all bash scripts in ~/bin
 echo "=== Installing ~/bin scripts ==="

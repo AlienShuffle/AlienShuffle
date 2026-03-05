@@ -1,5 +1,6 @@
 fast-xml-parser
 node-html-parser
 puppeteer
+yahoo-finance2
 @google-cloud/functions-framework
 @google/clasp 

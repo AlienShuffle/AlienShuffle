@@ -1,4 +1,4 @@
-foxundermoon.shell-format
+foxundermoon.shell-format@7.2.5
 github.copilot-chat
 google.geminicodeassist
 mechatroner.rainbow-csv

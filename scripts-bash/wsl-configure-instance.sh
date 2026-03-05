@@ -17,4 +17,4 @@ wsl.exe -d $instance -- bash \
     -c 'echo "'$userid' ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt" | sudo tee /etc/sudoers.d/cashanalyzer'
 
 # kick off the WSL boot strap processes.
-wsl.exe -d $instance -- bash -s <$REPO_ROOT/scripts/wsl-run-bootstrap.sh
+wsl.exe -d $instance -- bash -s <$REPO_ROOT/scripts-bash/wsl-run-bootstrap.sh

@@ -84,4 +84,11 @@ git config --global user.email "readngtndude@gmail.com"
 git config --global user.name "AlienShuffle ($WSL_DISTRO_NAME@$(hostname))"
 # probably need some login credentials process next.
 
+# make sure there is a link to my documents folder in the home directory.
+echo "=== Setting up ~/cdocs link ==="
+if [ ! -F ~/cdocs ] || ln -s /mnt/c/Users/alan/OneDrive/Documents/ ~/cdocs; then
+  echo "Failed to create ~/cdocs link to C:/Users/alan/OneDrive/Documents/"
+  exit 1
+fi
+
 echo "=== $0: completed! ==="

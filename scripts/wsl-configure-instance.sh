@@ -27,9 +27,12 @@ wsl.exe -d $instance -- bash -c "$wString"
 
 echo -e "\n=== Installing our own/etc/hosts to avoid WSL's auto-generated one from interfering with our bootstrap process."
 hostsFileString="$(<$REPO_ROOT/../config/hosts-template.txt)
-127.0.1.1 $instance"
+127.0.1.1 $instance.localdomain $instance"
 cString="echo -e '$hostsFileString' | sudo tee /etc/hosts >/dev/null"
-wsl.exe -d $instance -- bash     -c "$cString"
+wsl.exe -d $instance -- bash -c "$cString"
+
+echo -e "\n=== Setting hostname to $instance."
+wsl.exe -d $instance -- bash -c 'sudo hostnamectl set-hostname "'$instance'"'
 
 echo -e "\n=== Configuring WSL instance sudoers to allow passwordless apt-get and apt for user: $userid"
 wsl.exe -d $instance -- bash \

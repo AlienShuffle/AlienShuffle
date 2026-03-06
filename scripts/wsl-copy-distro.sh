@@ -20,3 +20,5 @@ pwsh.exe \
   -File "${REPO_ROOT}/Clone-WSL-Distro.ps1" \
   -Source "$instance" \
   -Clone "$clone" "$@"
+
+  echo -e "\n=== $0: completed! ==="

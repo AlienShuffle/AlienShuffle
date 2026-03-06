@@ -45,4 +45,4 @@ else
     echo "No bootstrap.sh found in repo. Skipping."
 fi
 
-echo -e "\n=== Done! ==="
+echo -e "\n=== $0: completed! ==="

@@ -37,3 +37,5 @@ wsl.exe -d $instance -- bash \
 
 echo -e "\n=== Kicking off WSL bootstrap processes."
 wsl.exe -d $instance -- bash -s <$REPO_ROOT/wsl-run-bootstrap.sh
+
+echo -e "\n=== $0: completed! ==="

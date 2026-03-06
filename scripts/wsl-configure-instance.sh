@@ -27,7 +27,8 @@ wsl.exe -d $instance -- bash -c "$wString"
 
 echo -e "\n=== Installing our own/etc/hosts to avoid WSL's auto-generated one from interfering with our bootstrap process."
 hostsFileString="$(<$REPO_ROOT/../config/hosts-template.txt)
-127.0.1.1   $instance.localdomain   $instance"
+127.0.1.1   $instance.localdomain   $instance
+"
 cString="echo -e '$hostsFileString' | sudo tee /etc/hosts >/dev/null"
 wsl.exe -d $instance -- bash -c "$cString"
 

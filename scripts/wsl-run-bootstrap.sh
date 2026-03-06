@@ -6,7 +6,7 @@
 # or
 # wsl.exe -d <instance-name> -- bash -s <./wsl-run-bootstrap.sh
 # 
-set -euo pipefail
+#set -euo pipefail
 
 if ! sudo -n /usr/bin/apt-get --version >/dev/null 2>&1; then
   echo "This bootstrap requires passwordless sudo."

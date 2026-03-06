@@ -1,5 +1,6 @@
 curl
 git
+gh
 jq
 npm
 tree

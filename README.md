@@ -17,6 +17,10 @@ On your master instance with this respository installed in Ubuntu, scripts direc
 # configure the clean copy with the bootstrapping process in this repo.
 ./wsl-configure-instance.sh target-instance
 ```
+Next items to nail down
+- how to easily pull the two optimizer repos or just CashAnalyzer
+- how to fix the /etc/hosts issue
+- run setupNode.sh in CashAnalyzer.
 Here are some WSL-related helpers I provided in the ~/bin from the configure task:
 ```
 # Lists installed WSL distros on this computer.

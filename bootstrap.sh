@@ -16,13 +16,13 @@ if [ ! -f "$REPO_ROOT"/config/apt-packages.txt ]; then
   echo "Package list not found: $REPO_ROOT/config/apt-packages.txt"
   exit 1
 fi
-echo "=== updating apt packages ==="
+echo -e "\n=== updating apt packages ==="
 sudo apt-get update -y
-echo "=== installing/verifying required packages ==="
+echo -e "\n=== installing/verifying required packages ==="
 xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y
 
 # install/verify NVM, install LTS NPM instance.
-echo "=== nvm setup ==="
+echo -e "\n=== nvm setup ==="
 if ! command -v ~/.nvm/nvm.sh >/dev/null; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 fi
@@ -33,7 +33,7 @@ if [ ! -f "$REPO_ROOT"/config/npm-packages.txt ]; then
   echo "Package list not found: $REPO_ROOT/config/apt-packages.txt"
   exit 1
 fi
-echo "=== Installing npm packages ==="
+echo -e "\n=== Installing npm packages ==="
 xargs -a "$REPO_ROOT"/config/npm-packages.txt npm install -g
 npm outdated -g || npm update -g
 
@@ -41,7 +41,7 @@ if [ ! -f "$REPO_ROOT"/config/vscode-extensions.txt ]; then
   echo "VS Code extensions list not found: $REPO_ROOT/config/vscode-extensions.txt"
   exit 1
 fi
-echo "=== Installing VS Code extensions ==="
+echo -e "\n=== Installing VS Code extensions ==="
 #xargs -a "$REPO_ROOT"/config/vscode-extensions.txt -L 1 code --install-extension
 list_file="$REPO_ROOT/config/vscode-extensions.txt"
 # Cache installed extensions into a fast lookup (exact IDs, one per line)
@@ -57,7 +57,7 @@ while IFS= read -r ext || [[ -n "$ext" ]]; do
 done <"$list_file"
 
 # install all bash scripts in ~/bin
-echo "=== Installing ~/bin scripts ==="
+echo -e "\n=== Installing ~/bin scripts ==="
 SRC_DIR="$REPO_ROOT/bin"
 DEST_DIR="$HOME/bin"
 mkdir -p "$DEST_DIR"
@@ -69,7 +69,7 @@ for src in "$SRC_DIR"/*; do
 done
 
 # install dot files in home directory
-echo "=== Installing ~ dot files ==="
+echo -e "\n=== Installing ~ dot files ==="
 SRC_DIR="$REPO_ROOT/dotfiles"
 DEST_DIR="$HOME"
 find "$DEST_DIR" -xtype l -print -delete
@@ -79,16 +79,16 @@ for src in "$SRC_DIR"/.*; do
 done
 
 # git setup.
-echo "=== git configuration ==="
+echo -e "\n=== git configuration ==="
 git config --global user.email "readngtndude@gmail.com"
 git config --global user.name "AlienShuffle ($WSL_DISTRO_NAME@$(hostname))"
 # probably need some login credentials process next.
 
 # make sure there is a link to my documents folder in the home directory.
-echo "=== Setting up ~/cdocs link ==="
+echo -e "\n=== Setting up ~/cdocs link ==="
 if [ ! -L ~/cdocs ]; then
   ln -s /mnt/c/Users/alan/OneDrive/Documents/ ~/cdocs
   [ $? -eq 0 ] || echo "Failed to create ~/cdocs link to C:/Users/alan/OneDrive/Documents/"
 fi
 
-echo "=== $0: completed! ==="
+echo -e "\n=== $0: completed! ==="

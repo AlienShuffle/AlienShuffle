@@ -11,7 +11,7 @@ set -euo pipefail
 function clone-github() {
     local REPO_URL="$1"
     local TARGET_DIR="$2"
-    echo "=== Cloning or updating repository: $REPO_URL ==="
+    echo -e "\n=== Cloning or updating repository: $REPO_URL ==="
     if [ ! -d "$TARGET_DIR/.git" ]; then
         echo "Cloning repository into $TARGET_DIR"
         git clone "$REPO_URL" "$TARGET_DIR"
@@ -21,7 +21,7 @@ function clone-github() {
     fi
 }
 
-echo "=== Checking for Git installation ==="
+echo -e "\n=== Checking for Git installation ==="
 if ! command -v git >/dev/null 2>&1; then
     echo "Git not found. Installing..."
     sudo apt-get update -y

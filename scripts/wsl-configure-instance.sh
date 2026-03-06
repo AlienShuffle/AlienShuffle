@@ -19,21 +19,21 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # -c commands support interactive sudo, so we do here, so that wsl-bootstrap.sh and bootstraps.sh
 # can assume passwordless sudo is configured.
 
-echo "=== Configuring WSL instance /etc/wsl.conf to to defaults and [user] default=$userid"
+echo -e "\n=== Configuring WSL instance /etc/wsl.conf to to defaults and [user] default=$userid"
 wslConfFileString="$(<$REPO_ROOT/../config/wsl-conf-template.txt)
 default=$userid"
-wString="echo -e '$wslConfFileString' | sudo tee /etc/wsl.conf"
+wString="echo -e '$wslConfFileString' | sudo tee /etc/wsl.conf >/dev/null"
 wsl.exe -d $instance -- bash -c "$wString"
 
-echo "=== Installing our own/etc/hosts to avoid WSL's auto-generated one from interfering with our bootstrap process."
+echo -e "\n=== Installing our own/etc/hosts to avoid WSL's auto-generated one from interfering with our bootstrap process."
 hostsFileString="$(<$REPO_ROOT/../config/hosts-template.txt)
 127.0.1.1 $instance"
-cString="echo -e '$hostsFileString' | sudo cat >/etc/hosts"
+cString="echo -e '$hostsFileString' | sudo tee /etc/hosts >/dev/null"
 wsl.exe -d $instance -- bash     -c "$cString"
 
-echo "=== Configuring WSL instance sudoers to allow passwordless apt-get and apt for user: $userid"
+echo -e "\n=== Configuring WSL instance sudoers to allow passwordless apt-get and apt for user: $userid"
 wsl.exe -d $instance -- bash \
-    -c 'echo "'$userid' ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt" | sudo tee /etc/sudoers.d/cashanalyzer'
+    -c 'echo "'$userid' ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt" | sudo tee /etc/sudoers.d/cashanalyzer >/dev/null'
 
-echo "=== Kicking off WSL bootstrap processes."
+echo -e "\n=== Kicking off WSL bootstrap processes."
 wsl.exe -d $instance -- bash -s <$REPO_ROOT/wsl-run-bootstrap.sh

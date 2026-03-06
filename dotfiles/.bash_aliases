@@ -3,8 +3,11 @@ if [ -n "$WSL_DISTRO_NAME" ] && [ "$WSL_DISTRO_NAME" != "$(hostname)" ]; then
     echo "=== Set hostname to the WSL instance name, this should only run once. ==="
     echo "Current hostname: $(hostname)"
     echo "Setting hostname to: $WSL_DISTRO_NAME"
+    grep -Fq "$WSL_DISTRO_NAME.localdomain" /etc/hosts || echo -e "127.0.1.1\t$WSL_DISTRO_NAME.localdomain\t$WSL_DISTRO_NAME" | sudo tee -a /etc/hosts >/dev/null
     sudo hostnamectl set-hostname "$WSL_DISTRO_NAME"
     echo "Hostname is now: $(hostname)"
+    echo "you may need to verify correctness of /etc/hosts and /etc/hostname files, and restart the WSL instance for the change to take effect."
+    grep 127.0.1.1 /etc/hosts
 fi
 
 #if [ -n "${WSL_DISTRO_NAME-}" ]; then

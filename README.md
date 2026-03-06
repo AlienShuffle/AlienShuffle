@@ -10,12 +10,10 @@
 This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
 Some sample (still to be verified) steps to initialize a new WSL instance.
+On your master instance with this respository installed in Ubuntu, scripts directory:
 ```
-wsl.exe --install -d Ubuntu-24.04
-wsl.exe --export Ubuntu-24.04 C:\WSL\ubuntu-base.tar
-wsl.exe --import Master C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
-wsl.exe --import Cash-Prod C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
-wsl.exe --import Cash-Test C:\WSL\Ubuntu-Test C:\WSL\ubuntu-base.tar
+./wsl-copy-distro.sh Ubuntu-24.04 target-instance
+./wsl-
 ```
 Clone this repository into the new Instance
 ```

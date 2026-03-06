@@ -86,9 +86,9 @@ git config --global user.name "AlienShuffle ($WSL_DISTRO_NAME@$(hostname))"
 
 # make sure there is a link to my documents folder in the home directory.
 echo "=== Setting up ~/cdocs link ==="
-if [ ! -F ~/cdocs ] || ln -s /mnt/c/Users/alan/OneDrive/Documents/ ~/cdocs; then
-  echo "Failed to create ~/cdocs link to C:/Users/alan/OneDrive/Documents/"
-  exit 1
+if [ ! -L ~/cdocs ]; then
+  ln -s /mnt/c/Users/alan/OneDrive/Documents/ ~/cdocs
+  [ $? -eq 0 ] || echo "Failed to create ~/cdocs link to C:/Users/alan/OneDrive/Documents/"
 fi
 
 echo "=== $0: completed! ==="

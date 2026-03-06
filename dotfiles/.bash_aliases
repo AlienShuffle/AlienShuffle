@@ -26,4 +26,5 @@ export NVM_DIR="/home/gebelea/.nvm"
 # WSL related aliases
 alias wsl=wsl.exe
 alias wsl-distros="wsl.exe -l -v"
-alias wsl-retire="wsl.exe --unregister"
+alias wsl-unregister="wsl.exe --unregister"
+alias wsl-terminate="wsl.exe --terminate"

@@ -22,6 +22,11 @@ Next items to nail down
 - how to fix the /etc/hosts issue
 - run setupNode.sh in CashAnalyzer.
 - use gh auth login for repos to enable cmd line usage.
+- add gh as a helper for git
+```
+gh auth login
+gh auth setup-git
+```
 Here are some WSL-related helpers I provided in the ~/bin from the configure task:
 ```
 # Lists installed WSL distros on this computer.

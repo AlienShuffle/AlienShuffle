@@ -5,7 +5,7 @@ set -e
 instance=$1
 userid=${2:-gebelea}
 
-distros=$(wsl.exe -l -q | iconv -f UTF-16LE -t UTF-8 | tr -d '\r')
+distros=$(wsl.exe -l -q | tr -d '\000' | tr -d '\r')
 if ! grep -Fxq "$instance" <<<"$distros"; then
     echo "$instance distribution not found, valid are: $(echo "$distros" | tr '\n' ',' | sed -e 's/,$//')"
     exit 1

@@ -23,7 +23,7 @@ echo "=== Checking for Git installation ==="
 if ! command -v git >/dev/null 2>&1; then
     echo "Git not found. Installing..."
     sudo apt-get update -y
-    sudo apt-get install -y git
+    sudo apt-get install -qq -y git
 else
     echo "Git already installed."
 fi

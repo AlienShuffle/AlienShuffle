@@ -25,7 +25,7 @@ echo "=== Checking for Git installation ==="
 if ! command -v git >/dev/null 2>&1; then
     echo "Git not found. Installing..."
     sudo apt-get update -y
-    sudo apt-get install -y git
+    sudo apt-get install -qq -y git
 fi
 clone-github "https://github.com/AlienShuffle/CashOptimizer.git" "$HOME/cloudflare"
 clone-github "https://github.com/AlienShuffle/CashAnalyzer.git" "$HOME/CashAnalyzer"

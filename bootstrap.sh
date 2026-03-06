@@ -19,7 +19,7 @@ fi
 echo "=== updating apt packages ==="
 sudo apt-get update -y
 echo "=== installing/verifying required packages ==="
-xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -y
+xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y
 
 # install/verify NVM, install LTS NPM instance.
 echo "=== nvm setup ==="

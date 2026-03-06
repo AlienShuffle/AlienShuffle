@@ -9,13 +9,50 @@
 # Bootstrapping
 This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
-Some sample steps to initialize a new WSL instance.
+## Steps to initialize a new WSL instance to produce a DevOps environment from a fresh Win11 box
+Prerequisites:
+- WSL2
+- winget
+- Powershell 7
+- Git for Windows
+See `scripts/configure-windows.ps1` for help
+Run the next block in Powershell 7 (not Windows Powershell)
+```
+# grab your preferred reference WSL distro.
+wsl.exe --install Ubuntu-24.04
+mkdir C:\WSL
+cd C:\WSL
+
+# pull this Repository
+& "C:\Program Files\Git\bin\git" clone 'https://github.com/AlienShuffle/AlienShuffle.git' .\bootstrap
+
+# clone default (don't work in the default instance)
+cd .\bootstrap\scripts\
+pwsh .\Clone-WSL-Distro.ps1 -Source Ubuntu-24.04 -Clone master
+& "C:\Program Files\Git\bin\bash" wsl-configure-instance.sh master
+# the bootstrap full run will fail, but the initial config steps are done.
+# the rest can be done within master
+wsl.exe -d master
+```
+# Instance master started, run in Ubuntu here
+```
+# make sure you are in the windows directory with the git repo.
+cd /mnt/c/wsl/bootstrap/scripts
+bash ./wsl-run-bootstrap.sh
+```
 On your master instance with this respository installed in Ubuntu, scripts directory:
 ```
 # take your reference distro and make a clean copy.
+g
+# duplicate your reference distribution
+cd ~/boostrap/scripts
 ./wsl-copy-distro.sh Ubuntu-24.04 target-instance
 # configure the clean copy with the bootstrapping process in this repo.
 ./wsl-configure-instance.sh target-instance
+```
+Install CashAnalyzer Repo
+```
+
 ```
 Next items to nail down
 - how to easily pull the two optimizer repos or just CashAnalyzer

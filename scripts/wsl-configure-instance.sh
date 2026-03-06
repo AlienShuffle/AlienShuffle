@@ -13,12 +13,23 @@ fi
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+[ ! -f "$REPO_ROOT/../config/wsl-conf-template.txt" ] && echo "Missing wsl-conf-template.txt in config directory" && exit 1
+[ ! -f "$REPO_ROOT/../config/hosts-template.txt" ] && echo "Missing hosts-template.txt in config directory" && exit 1
+
 # -c commands support interactive sudo, so we do here, so that wsl-bootstrap.sh and bootstraps.sh
 # can assume passwordless sudo is configured.
-# Configure WSL instance to use the current user as default.
-echo "=== Configuring WSL instance /etc/wsl.conf to use user: $userid"
-wsl.exe -d $instance -- bash \
-    -c 'grep -Fxq "default='$userid'" /etc/wsl.conf || (echo -e "[user]\ndefault='$userid'" | sudo tee /etc/wsl.conf >/dev/null)'
+
+echo "=== Configuring WSL instance /etc/wsl.conf to to defaults and [user] default=$userid"
+wslConfFileString="$(<$REPO_ROOT/../config/wsl-conf-template.txt)
+default=$userid"
+wString="echo -e '$wslConfFileString' | sudo tee /etc/wsl.conf"
+wsl.exe -d $instance -- bash -c "$wString"
+
+echo "=== Installing our own/etc/hosts to avoid WSL's auto-generated one from interfering with our bootstrap process."
+hostsFileString="$(<$REPO_ROOT/../config/hosts-template.txt)
+127.0.1.1 $instance"
+cString="echo -e '$hostsFileString' | sudo cat >/etc/hosts"
+wsl.exe -d $instance -- bash     -c "$cString"
 
 echo "=== Configuring WSL instance sudoers to allow passwordless apt-get and apt for user: $userid"
 wsl.exe -d $instance -- bash \

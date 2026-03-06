@@ -9,37 +9,22 @@
 # Bootstrapping
 This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
-Some sample (still to be verified) steps to initialize a new WSL instance.
+Some sample steps to initialize a new WSL instance.
+On your master instance with this respository installed in Ubuntu, scripts directory:
 ```
-wsl.exe --install -d Ubuntu-24.04
-wsl.exe --export Ubuntu-24.04 C:\WSL\ubuntu-base.tar
-wsl.exe --import Master C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
-wsl.exe --import Cash-Prod C:\WSL\Ubuntu-Prod C:\WSL\ubuntu-base.tar
-wsl.exe --import Cash-Test C:\WSL\Ubuntu-Test C:\WSL\ubuntu-base.tar
+# take your reference distro and make a clean copy.
+./wsl-copy-distro.sh Ubuntu-24.04 target-instance
+# configure the clean copy with the bootstrapping process in this repo.
+./wsl-configure-instance.sh target-instance
 ```
-Clone this repository into the new Instance
+Here are some WSL-related helpers I provided in the ~/bin from the configure task:
 ```
- wsl.exe -d Cash-Prod -- bash -c "
-        userid=gebelea
-        sudo apt-get update -y &&
-        sudo apt-get install -y git &&
-        if [ ! -d '/home/\$userid/bootstrap/.git' ]; then
-            git clone 'https://github.com/AlienShuffle/AlienShuffle.git' '/home/\$userid/bootstrap'
-        else
-            git -C '$RepoDir' pull --ff-only
-        fi
-    "
-
-wsl -d Cash-Prod -- bash -c "~/bootstrap/bootstrap.sh"
-```
-list installed distros:
-```
-wsl.exe --list --verbose
-```
-Delete an installed instance:
-```
-wsl.exe --unregister Cash-Prod
-wsl.exe --unregister Cash-Test
+# Lists installed WSL distros on this computer.
+wsl-list.sh  
+# deletes target-instance PERMENANTLY!
+wsl-unregister.sh target-instance
+# fix when code.exe fails of wsl.exe (requires sudo)
+fix-wsl-interop.sh
 ```
 <!---
 AlienShuffle/AlienShuffle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

@@ -45,4 +45,4 @@ else
     echo "No bootstrap.sh found in repo. Skipping."
 fi
 
-echo -e "\n=== $0: completed! ==="
+echo -e "\n=== wsl-run-bootstrap.sh: completed! ==="

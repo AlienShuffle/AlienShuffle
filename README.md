@@ -19,7 +19,6 @@ On your master instance with this respository installed in Ubuntu, scripts direc
 ```
 Next items to nail down
 - how to easily pull the two optimizer repos or just CashAnalyzer
-- how to fix the /etc/hosts issue
 - run setupNode.sh in CashAnalyzer.
 - use gh auth login for repos to enable cmd line usage.
 - add gh as a helper for git

@@ -8,7 +8,7 @@
 # 
 set -euo pipefail
 
-if ! sudo -n true 2>/dev/null; then
+if ! sudo -n /usr/bin/apt-get --version >/dev/null 2>&1; then
   echo "This bootstrap requires passwordless sudo."
   echo "Run once in this environment: sudo visudo"
   echo "Then add the following line to the end of the file"

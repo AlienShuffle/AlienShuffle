@@ -10,35 +10,36 @@
 This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
 ## Steps to initialize a new WSL instance to produce a DevOps environment from a fresh Win11 box
-Prerequisites:
-- WSL2
-- winget
-- Powershell 7
-- Git for Windows
-See `scripts/configure-windows.ps1` for help
-Run the next block in Powershell 7 (not Windows Powershell)
+Prerequisites are documented in `scripts/configure-windows.ps1`
+- If you pull down the script.
 ```
-# grab your preferred reference WSL distro.
+powershell.exe configure-windows.ps1
+```
+Run the next block in Powershell 7 (not Windows Powershell)
+- Grab your preferred reference WSL distro.
+```
 wsl.exe --install Ubuntu-24.04
 mkdir C:\WSL
 cd C:\WSL
-
-# pull this Repository
+```
+- Pull the boostrap repository
+```
 & "C:\Program Files\Git\bin\git" clone 'https://github.com/AlienShuffle/AlienShuffle.git' .\bootstrap
-
-# Clone distro - don't work in the original downloaded instance, keep it clean.
+```
+- Clone distro - don't work in the original downloaded instance, keep it clean.
+```
 cd .\bootstrap\scripts\
 pwsh .\Clone-WSL-Distro.ps1 -Source Ubuntu-24.04 -Clone master
 & "C:\Program Files\Git\bin\bash" wsl-configure-instance.sh master
-# the bootstrap full run will fail, but the initial config steps are done.
-# the rest can be done within master
+```
+The bootstrap full run will likely fail, but the initial config steps are done. The rest can be done within `master`.
+```
 wsl.exe -d master
 ```
-# Instance master started, run in Ubuntu here
-It is possible that git is not installed on some distros.
-You may need to run an install first.
+# Instance master started, run in `master` from now on.
+- It is possible that git is not installed on some distros. You may need to run git install first.
 ```
-sudo apt-get install -qq -y git
+command -v git || sudo apt-get install -qq -y git
 ```
 - Clone bootstrap repo
 ```
@@ -74,15 +75,6 @@ gh auth setup-git
 - Clone cloudflare repo only on `production` instance
 ```
 git clone 'https://github.com/AlienShuffle/CashOptimizer.git' ~/cloudflare
-```
-Here are some WSL-related helpers I provided in the ~/bin from the configure task:
-```
-# Lists installed WSL distros on this computer.
-wsl-list.sh  
-# deletes target-instance PERMENANTLY!
-wsl-unregister.sh target-instance
-# fix when code.exe fails of wsl.exe (requires sudo)
-fix-wsl-interop.sh
 ```
 <!---
 AlienShuffle/AlienShuffle is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.

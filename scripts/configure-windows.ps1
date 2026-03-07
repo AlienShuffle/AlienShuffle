@@ -1,14 +1,14 @@
 # get Powershell v7.x
-echo "###Installing PowerShell 7.x"
+Write-Host "###Installing PowerShell 7.x"
 winget install --id Microsoft.PowerShell --source winget
 # make sure a default instance is running.
-echo
-echo "###Installing Ubuntu instance"
+Write-Host
+Write-Host "###Installing Ubuntu instance"
 wsl.exe --install -d Ubuntu
-echo
-echo "###Updating WSL"
+Write-Host
+Write-Host "###Updating WSL"
 wsl.exe --update
 # install Windows Git
-echo
-echo "###Installing Windows Git"
+Write-Host
+Write-Host "###Installing Windows Git"
 winget install --id Git.Git -e --source winget

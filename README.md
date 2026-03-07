@@ -26,7 +26,7 @@ cd C:\WSL
 # pull this Repository
 & "C:\Program Files\Git\bin\git" clone 'https://github.com/AlienShuffle/AlienShuffle.git' .\bootstrap
 
-# clone default (don't work in the default instance)
+# Clone distro - don't work in the original downloaded instance, keep it clean.
 cd .\bootstrap\scripts\
 pwsh .\Clone-WSL-Distro.ps1 -Source Ubuntu-24.04 -Clone master
 & "C:\Program Files\Git\bin\bash" wsl-configure-instance.sh master
@@ -35,33 +35,45 @@ pwsh .\Clone-WSL-Distro.ps1 -Source Ubuntu-24.04 -Clone master
 wsl.exe -d master
 ```
 # Instance master started, run in Ubuntu here
+It is possible that git is not installed on some distros.
+You may need to run an install first.
 ```
-# make sure you are in the windows directory with the git repo.
-cd /mnt/c/wsl/bootstrap/scripts
-bash ./wsl-run-bootstrap.sh
+sudo apt-get install -qq -y git
 ```
-On your master instance with this respository installed in Ubuntu, scripts directory:
+- Clone bootstrap repo
 ```
-# take your reference distro and make a clean copy.
-g
-# duplicate your reference distribution
+git clone 'https://github.com/AlienShuffle/AlienShuffle.git' ~/bootstrap
+```
+- Make sure all core setup is complete, then calls ../bootstrap.sh
+```
+cd ~/bootstrap/scripts
+./wsl-run-bootstrap.sh
+```
+# Now we work in the `master` instance with this respository
+Repeat these steps three times for `dev`, `testing`, and `production`
+- Take your reference distro and make a clean copy by duplicating your original distribution
+```
 cd ~/boostrap/scripts
-./wsl-copy-distro.sh Ubuntu-24.04 target-instance
-# configure the clean copy with the bootstrapping process in this repo.
-./wsl-configure-instance.sh target-instance
+./wsl-copy-distro.sh Ubuntu-24.04 dev
 ```
-Install CashAnalyzer Repo
+- Configure the new copy with the bootstrapping process in this repo.
 ```
-
+./wsl-configure-instance.sh dev
 ```
-Next items to nail down
-- how to easily pull the two optimizer repos or just CashAnalyzer
-- run setupNode.sh in CashAnalyzer.
-- use gh auth login for repos to enable cmd line usage.
-- add gh as a helper for git
+- Install CashAnalyzer Repo
 ```
+git clone 'https://github.com/AlienShuffle/CashAnalyzer.git' ~/CashAnalyzer
+```
+- Initialize the node packages and authenticate
+```
+cd ~/CashAnalyzer
+./setupNode.sh
 gh auth login
 gh auth setup-git
+```
+- Clone cloudflare repo only on `production` instance
+```
+git clone 'https://github.com/AlienShuffle/CashOptimizer.git' ~/cloudflare
 ```
 Here are some WSL-related helpers I provided in the ~/bin from the configure task:
 ```

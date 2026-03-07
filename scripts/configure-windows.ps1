@@ -1,7 +1,7 @@
+# get Powershell v7.x
 winget install --id Microsoft.PowerShell --source winget
-# also need to install the latest .lots of stuff to work.
-# git pull the bootstrap repo.
-# install git for Windows
-# I am sure there is more.
-# pull down the latest Ubuntu image and install WSL2
-# install the latest Windows Terminal
+# make sure a default instance is running.
+wsl.exe --install -d Ubuntu
+wsl.exe --update
+# install Windows Git
+winget install --id Git.Git -e --source winget

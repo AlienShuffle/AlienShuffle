@@ -48,11 +48,11 @@ git clone 'https://github.com/AlienShuffle/AlienShuffle.git' ~/bootstrap
 - Make sure all core setup is complete, then calls ../bootstrap.sh
 ```
 cd ~/bootstrap/scripts
-./wsl-run-bootstrap.sh
+./prep-run-bootstrap.sh
 ```
 # Now we work in the `master` instance with this respository
 Repeat these steps three times for `dev`, `testing`, and `production`
-- Take your reference distro and make a clean copy by duplicating your original distribution
+- Take your reference distro and make a clean copy by duplicating it
 ```
 cd ~/boostrap/scripts
 ./wsl-copy-distro.sh Ubuntu-24.04 dev

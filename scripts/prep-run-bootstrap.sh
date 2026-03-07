@@ -1,10 +1,12 @@
 #!/bin/bash
 #
-# Run the basic processes required to initialize a WSL instance for use with AlienShuffle.
+# Run the basic processes required to initialize a WSL instance for use with AlienShuffle environment.
 # This is designed to be run from powershell or bash source executable as:
-# wsl.exe -d <instance-name> -e ./wsl-run-bootstrap.sh
+# wsl.exe -d <instance-name> -e ./prep-run-bootstrap.sh
 # or
-# wsl.exe -d <instance-name> -- bash -s <./wsl-run-bootstrap.sh
+# wsl.exe -d <instance-name> -- bash -s <./prep-run-bootstrap.sh
+# or locally from within the WSL instance as:
+# cd ~/bootstrap/scripts && ./prep-run-bootstrap.sh
 # 
 #set -euo pipefail
 
@@ -37,7 +39,7 @@ else
     git -C "$TARGET_DIR" pull --ff-only
 fi
 
-echo -e "\n=== Running bootstrap script if present ==="
+echo -e "\n=== Running bootstrap.sh script if present ==="
 if [ -f "$TARGET_DIR/bootstrap.sh" ]; then
     chmod +x "$TARGET_DIR/bootstrap.sh"
     "$TARGET_DIR/bootstrap.sh"
@@ -45,4 +47,4 @@ else
     echo "No bootstrap.sh found in repo. Skipping."
 fi
 
-echo -e "\n=== wsl-run-bootstrap.sh: completed! ==="
+echo -e "\n=== prep-run-bootstrap.sh: completed! ==="

@@ -21,6 +21,9 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo -e "\n=== Configuring WSL instance /etc/wsl.conf to to defaults and [user] default=$userid"
 wslConfFileString="$(<$REPO_ROOT/../config/wsl-conf-template.txt)
+hostname=$instance
+
+[user]
 default=$userid"
 wString="echo -e '$wslConfFileString' | sudo tee /etc/wsl.conf >/dev/null"
 wsl.exe -d $instance -- bash -c "$wString"

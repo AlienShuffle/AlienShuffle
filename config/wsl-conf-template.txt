@@ -4,5 +4,3 @@ systemd=true
 
 [network]
 generateHosts=false
-
-[user]

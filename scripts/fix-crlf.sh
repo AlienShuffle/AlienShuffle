@@ -36,7 +36,8 @@ mapfile -d '' crlf_files < <(
   while IFS= read -r -d '' f; do
     # `file -b` = brief (no filename prefix)
     # If it mentions CRLF line terminators, convert it.
-    if file -b "$f" | grep -q 'CRLF line terminators'; then
+    if file -b "$f" | grep -q 'CRLF line terminators' ||
+    file -b "$f" | grep -q 'CRLF, LF line terminators'; then
       printf '%s\0' "$f"
     fi
   done

@@ -62,6 +62,9 @@ cd ~/boostrap/scripts
 ./wsl-configure-instance.sh dev
 ```
 - Now, continue within bash on the `dev` instance.
+```
+wsl.exe -d dev
+```
 -- Install CashAnalyzer Repo
 ```
 git clone 'https://github.com/AlienShuffle/CashAnalyzer.git' ~/CashAnalyzer

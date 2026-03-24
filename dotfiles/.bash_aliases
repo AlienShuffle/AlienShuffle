@@ -5,6 +5,7 @@ export NVM_DIR="/home/gebelea/.nvm"
 
 # WSL related aliases
 alias wsl=wsl.exe
+alias wsl-default="wsl.exe --set-default"
 alias wsl-distros="wsl.exe -l -v"
 alias wsl-run="wsl.exe -d"
 alias wsl-terminate="wsl.exe --terminate"

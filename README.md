@@ -36,7 +36,7 @@ The bootstrap full run will likely fail, but the initial config steps are done. 
 ```
 wsl.exe -d master
 ```
-# Instance master started, run in `master` from now on.
+# Instance `master` started, run from `bash` in `master` from now on.
 - It is possible that git is not installed on some distros. You may need to run git install first.
 ```
 command -v git || sudo apt-get install -qq -y git
@@ -50,29 +50,30 @@ git clone 'https://github.com/AlienShuffle/AlienShuffle.git' ~/bootstrap
 cd ~/bootstrap/scripts
 ./prep-run-bootstrap.sh
 ```
-# Now we work in the `master` instance with this respository
+# Continue within the `master` instance to replicate the environment
 Repeat these steps three times for `dev`, `testing`, and `production`
 - Take your reference distro and make a clean copy by duplicating it
 ```
 cd ~/boostrap/scripts
 ./wsl-copy-distro.sh Ubuntu-24.04 dev
 ```
-- Configure the new copy with the bootstrapping process in this repo.
+- Configure the new environment using the bootstrapping process.
 ```
 ./wsl-configure-instance.sh dev
 ```
-- Install CashAnalyzer Repo
+- Now, continue within bash on the `dev` instance.
+-- Install CashAnalyzer Repo
 ```
 git clone 'https://github.com/AlienShuffle/CashAnalyzer.git' ~/CashAnalyzer
 ```
-- Initialize the node packages and authenticate
+- Initialize the node packages and authenticate to github
 ```
 cd ~/CashAnalyzer
 ./setupNode.sh
 gh auth login
 gh auth setup-git
 ```
-- Clone cloudflare repo only on `production` instance
+- Clone cloudflare repo only on `production` instance (`dev`/`test` just run local copies)
 ```
 git clone 'https://github.com/AlienShuffle/CashOptimizer.git' ~/cloudflare
 ```

@@ -26,7 +26,7 @@ if command -v chromium-browser >/dev/null 2>&1; then
   if [ -d "/snap/chromium" ]; then
     echo -e "\n=== Removing snap chromium package ==="
     sudo snap remove --purge chromium || echo "Failed to remove snap chromium package. Please check manually."
-    sudo apt purge snapd
+    sudo apt purge snapd -y
   fi
 fi
 

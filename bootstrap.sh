@@ -21,6 +21,19 @@ sudo apt-get update -y
 echo -e "\n=== installing/verifying required packages ==="
 xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y
 
+#cleanup bad chromium snap package if it exists,
+if command -v chromium-browser >/dev/null 2>&1; then
+  if [ -d "/snap/chromium" ]; then
+    echo -e "\n=== Removing snap chromium package ==="
+    sudo snap remove --purge chromium || echo "Failed to remove snap chromium package. Please check manually."
+    sudo apt purge snapd
+  fi
+fi
+
+[ ! -f google-chrome-stable_current_amd64.deb ] && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb
+
+
 # install/verify NVM, install LTS NPM instance.
 echo -e "\n=== nvm setup ==="
 if ! command -v ~/.nvm/nvm.sh >/dev/null; then

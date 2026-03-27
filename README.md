@@ -65,9 +65,11 @@ cd ~/boostrap/scripts
 ```
 wsl.exe -d dev
 ```
--- Install CashAnalyzer Repo
+-- Install CashAnalyzer Repo and update npm `node_modules`
 ```
 git clone 'https://github.com/AlienShuffle/CashAnalyzer.git' ~/CashAnalyzer
+cd ~/CashAnalyzer
+./deployNode.sh
 ```
 - Initialize the node packages and authenticate to github
 ```

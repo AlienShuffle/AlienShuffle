@@ -71,10 +71,8 @@ git clone 'https://github.com/AlienShuffle/CashAnalyzer.git' ~/CashAnalyzer
 cd ~/CashAnalyzer
 ./deployNode.sh
 ```
-- Initialize the node packages and authenticate to github
+- Authenticate to github
 ```
-cd ~/CashAnalyzer
-./setupNode.sh
 gh auth login
 gh auth setup-git
 ```

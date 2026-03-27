@@ -33,11 +33,9 @@ fi
 # make sure google chrome is installed, since it's required for some of my work.
 if ! command -v google-chrome >/dev/null 2>&1; then
   echo -e "\n=== Installing Google Chrome ==="
-  tmpdeb="$(mktemp)"
+  tmpdeb="$(mktemp).deb"
   wget -qO "$tmpdeb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  sudo apt update -y
   sudo apt install -y "$tmpdeb"
-  echo rm -f "$tmpdeb"
   rm -f "$tmpdeb"
 else
   echo -e "\n=== Updating Google Chrome ==="

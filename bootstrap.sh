@@ -21,18 +21,32 @@ sudo apt-get update -y
 echo -e "\n=== installing/verifying required packages ==="
 xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y
 
-#cleanup bad chromium snap package if it exists,
+# cleanup bad chromium snap package if it exists,
 if command -v chromium-browser >/dev/null 2>&1; then
   if [ -d "/snap/chromium" ]; then
     echo -e "\n=== Removing snap chromium package ==="
     sudo snap remove --purge chromium || echo "Failed to remove snap chromium package. Please check manually."
-    sudo apt purge snapd -y
+    sudo apt-get purge snapd -y
   fi
 fi
 
-[ ! -f google-chrome-stable_current_amd64.deb ] && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+# make sure google chrome is installed, since it's required for some of my work.
+if ! command -v google-chrome >/dev/null 2>&1; then
+  echo -e "\n=== Installing Google Chrome ==="
+  tmpdeb="$(mktemp)"
+  wget -qO "$tmpdeb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo apt-get update -y
+  sudo apt-get install -y "$tmpdeb"
+  echo rm -f "$tmpdeb"
+  rm -f "$tmpdeb"
+else
+  echo -e "\n=== Updating Google Chrome ==="
+  sudo apt-get update -y
+  sudo apt-get install -y --only-upgrade google-chrome-stable || true
+fi
 
+echo -e "\n=== Cleaning up cruft ==="
+sudo apt-get autoremove -y
 
 # install/verify NVM, install LTS NPM instance.
 echo -e "\n=== nvm setup ==="

@@ -19,3 +19,4 @@ libxrandr2
 libgbm1
 libgtk-3-0t64
 libxshmfence1
+wslu

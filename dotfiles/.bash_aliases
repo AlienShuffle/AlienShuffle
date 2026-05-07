@@ -4,7 +4,7 @@ export NVM_DIR="/home/gebelea/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # setup brew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -x "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # WSL related aliases
 alias wsl=wsl.exe

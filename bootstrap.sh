@@ -43,13 +43,23 @@ else
   sudo apt-get install -y --only-upgrade google-chrome-stable || true
 fi
 
-if ! command -v brew >/dev/null 2>&1; then
+if ! command -v /home/linuxbrew/.linuxbrew/bin/brew >/dev/null 2>&1; then
   echo -e "\n=== Installing brew ==="
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
 fi
-echo -e "\n=== Installing brew packages ==="
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-xargs -a "$REPO_ROOT"/config/brew-packages.txt brew install
+if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  echo -e "\n=== Setting up brew environment ==="
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+  echo -e "\n=== Installing brew packages ==="
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+  xargs -a "$REPO_ROOT"/config/brew-packages.txt brew install --quiet
+
+ echo -e "\n=== updating/cleanup brew packages ==="
+  brew update && brew upgrade && brew cleanup
+else
+  echo "Brew installation not found at expected location: /home/linuxbrew/.linuxbrew/bin/brew"
+fi
 
 echo -e "\n=== Cleaning up cruft ==="
 sudo apt-get autoremove -y

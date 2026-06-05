@@ -44,8 +44,12 @@ else
 fi
 
 if ! command -v /home/linuxbrew/.linuxbrew/bin/brew >/dev/null 2>&1; then
-  echo -e "\n=== Installing brew ==="
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
+  if [ -t 0 ]; then
+    echo -e "\n=== Installing brew ==="
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  else
+    echo "Skipping brew installation because no interactive terminal is available for sudo password entry."
+  fi
 fi
 if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   echo -e "\n=== Setting up brew environment ==="

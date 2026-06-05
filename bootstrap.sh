@@ -59,7 +59,7 @@ if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
   xargs -a "$REPO_ROOT"/config/brew-packages.txt brew install --quiet
 
-  echo -e "\n=== updating/cleanup brew packages ==="
+  echo -e "\n=== updating/cleanup brew packages ===\n"
   brew update && brew upgrade && brew cleanup
 else
   echo "Brew installation not found at expected location: /home/linuxbrew/.linuxbrew/bin/brew"

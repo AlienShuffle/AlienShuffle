@@ -24,12 +24,12 @@ hostname=$instance
 
 [user]
 default=$userid"
-wsl.exe -d $instance -- bash -c "echo '$wslConfFileString' | sudo tee /etc/wsl.conf >/dev/null" 2>/dev/null || true
+wsl.exe -u root -d $instance -- bash -c "echo '$wslConfFileString' | tee /etc/wsl.conf >/dev/null"
 
 echo -e "\n=== Configuring WSL instance sudoers to allow passwordless sudo for user: $userid"
-echo "$userid ALL=(ALL) NOPASSWD: ALL" | wsl.exe -d $instance -- bash -c "cat | sudo tee /etc/sudoers.d/cashanalyzer >/dev/null && sudo chmod 440 /etc/sudoers.d/cashanalyzer" 2>/dev/null || true
+wsl.exe -u root -d $instance -- bash -c "echo '$userid ALL=(ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/cashanalyzer >/dev/null && chmod 440 /etc/sudoers.d/cashanalyzer"
 
 echo -e "\n=== Kicking off WSL bootstrap processes."
-wsl.exe -d $instance -- bash -s <$REPO_ROOT/prep-run-bootstrap.sh
+cat "$REPO_ROOT/prep-run-bootstrap.sh" | wsl.exe -d $instance -- bash -s
 
 echo -e "\n=== $0: completed! ==="

@@ -19,7 +19,7 @@ fi
 echo -e "\n=== updating apt packages ==="
 sudo apt-get update -qq -y
 echo -e "\n=== installing/verifying required packages ==="
-xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y
+xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y >/dev/null
 
 # cleanup bad chromium snap package if it exists,
 if command -v chromium-browser >/dev/null 2>&1; then
@@ -48,7 +48,7 @@ if ! command -v /home/linuxbrew/.linuxbrew/bin/brew >/dev/null 2>&1; then
     echo -e "\n=== Installing brew ==="
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   else
-    echo "Skipping brew installation because no interactive terminal is available for sudo password entry."
+    echo -e "\n=== Skipping brew installation because no interactive terminal is available for sudo password entry. ==="
   fi
 fi
 if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then

@@ -17,7 +17,7 @@ if [ ! -f "$REPO_ROOT"/config/apt-packages.txt ]; then
   exit 1
 fi
 echo -e "\n=== updating apt packages ==="
-sudo apt-get update -y
+sudo apt-get update -qq -y
 echo -e "\n=== installing/verifying required packages ==="
 xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y
 
@@ -26,7 +26,7 @@ if command -v chromium-browser >/dev/null 2>&1; then
   if [ -d "/snap/chromium" ]; then
     echo -e "\n=== Removing snap chromium package ==="
     sudo snap remove --purge chromium || echo "Failed to remove snap chromium package. Please check manually."
-    sudo apt-get purge snapd -y
+    sudo apt-get purge snapd -qq -y
   fi
 fi
 
@@ -39,8 +39,8 @@ if ! command -v google-chrome >/dev/null 2>&1; then
   rm -f "$tmpdeb"
 else
   echo -e "\n=== Updating Google Chrome ==="
-  sudo apt-get update -y
-  sudo apt-get install -y --only-upgrade google-chrome-stable || true
+  sudo apt-get update -qq -y
+  sudo apt-get install -qq -y --only-upgrade google-chrome-stable || true
 fi
 
 if ! command -v /home/linuxbrew/.linuxbrew/bin/brew >/dev/null 2>&1; then
@@ -66,7 +66,7 @@ else
 fi
 
 echo -e "\n=== Cleaning up cruft ==="
-sudo apt-get autoremove -y
+sudo apt-get autoremove -qq -y
 
 # install/verify NVM, install LTS NPM instance.
 nvmVersion="0.40.5"

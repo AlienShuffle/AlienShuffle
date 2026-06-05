@@ -55,7 +55,7 @@ if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
   xargs -a "$REPO_ROOT"/config/brew-packages.txt brew install --quiet
 
- echo -e "\n=== updating/cleanup brew packages ==="
+  echo -e "\n=== updating/cleanup brew packages ==="
   brew update && brew upgrade && brew cleanup
 else
   echo "Brew installation not found at expected location: /home/linuxbrew/.linuxbrew/bin/brew"
@@ -65,15 +65,23 @@ echo -e "\n=== Cleaning up cruft ==="
 sudo apt-get autoremove -y
 
 # install/verify NVM, install LTS NPM instance.
-echo -e "\n=== nvm setup ==="
+nvmVersion="0.40.5"
+echo -e "\n=== nvm $nvmVersion setup ==="
 if ! command -v ~/.nvm/nvm.sh >/dev/null; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+  echo "initial install of nvm $nvmVersion"
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash
+fi
+source ~/.nvm/nvm.sh
+if [ ! "$(nvm --version)" = "$nvmVersion" ]; then
+  echo "Updating nvm to $nvmVersion"
+  echo "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash"
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash
 fi
 source ~/.nvm/nvm.sh
 nvm install --lts
 
 if [ ! -f "$REPO_ROOT"/config/npm-packages.txt ]; then
-  echo "Package list not found: $REPO_ROOT/config/apt-packages.txt"
+  echo "Package list not found: $REPO_ROOT/config/npm-packages.txt"
   exit 1
 fi
 echo -e "\n=== Installing npm packages ==="

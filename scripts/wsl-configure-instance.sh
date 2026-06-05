@@ -27,11 +27,11 @@ echo "" >> "$tmpFile"
 echo "[user]" >> "$tmpFile"
 echo "default=$userid" >> "$tmpFile"
 encodedConf=$(base64 -w0 < "$tmpFile")
-$WSL_CMD -u root -d $instance -- bash -c "echo '$encodedConf' | base64 -d | tee /etc/wsl.conf >/dev/null"
+$WSL_CMD -u root -d $instance -- bash -c "echo '$encodedConf' | base64 -d | tee /etc/wsl.conf"
 rm -f "$tmpFile"
 
 echo -e "\n=== Configuring WSL instance sudoers to allow passwordless sudo for user: $userid"
-$WSL_CMD -u root -d $instance -- bash -c "echo '$userid ALL=(ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/cashanalyzer >/dev/null && chmod 440 /etc/sudoers.d/cashanalyzer"
+$WSL_CMD -u root -d $instance -- bash -c "echo '$userid ALL=(ALL) NOPASSWD: ALL' | tee /etc/sudoers.d/cashanalyzer && chmod 440 /etc/sudoers.d/cashanalyzer"
 
 echo -e "\n=== Kicking off WSL bootstrap processes."
 cat "$REPO_ROOT/prep-run-bootstrap.sh" | $WSL_CMD -d $instance -- bash -s

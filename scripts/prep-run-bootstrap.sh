@@ -11,7 +11,7 @@
 #set -euo pipefail
 
 if ! sudo -n /usr/bin/apt-get --version >/dev/null 2>&1; then
-  echo "This bootstrap requires passwordless sudo."
+  echo "This bootstrap requires passwordless sudo apt."
   echo "Run once in this environment: sudo visudo"
   echo "Then add the following line to the end of the file"
   echo 'yourusername ALL=(ALL) NOPASSWD: /usr/bin/apt-get, /usr/bin/apt'

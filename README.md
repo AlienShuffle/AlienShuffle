@@ -66,8 +66,10 @@ cd ~/boostrap/scripts
 wsl.exe -d dev
 ```
 -- Re-run bootstrap.sh locally to ensure up to date.
+```
 cd bootstrap
 ./bootstrap.sh
+```
 -- Install CashAnalyzer Repo and update npm `node_modules`
 ```
 git clone 'https://github.com/AlienShuffle/CashAnalyzer.git' ~/CashAnalyzer

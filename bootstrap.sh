@@ -21,50 +21,48 @@ sudo apt-get update -qq -y
 echo -e "\n=== installing/verifying required packages ==="
 xargs -a "$REPO_ROOT"/config/apt-packages.txt sudo apt-get install -qq -y >/dev/null
 
-if false; then
-  # cleanup bad chromium snap package if it exists,
-  if command -v chromium-browser >/dev/null 2>&1; then
-    if [ -d "/snap/chromium" ]; then
-      echo -e "\n=== Removing snap chromium package ==="
-      sudo snap remove --purge chromium || echo "Failed to remove snap chromium package. Please check manually."
-      sudo apt-get purge snapd -qq -y
-    fi
+# cleanup bad chromium snap package if it exists,
+if command -v chromium-browser >/dev/null 2>&1; then
+  if [ -d "/snap/chromium" ]; then
+    echo -e "\n=== Removing snap chromium package ==="
+    sudo snap remove --purge chromium || echo "Failed to remove snap chromium package. Please check manually."
+    sudo apt-get purge snapd -qq -y
   fi
+fi
 
-  # make sure google chrome is installed, since it's required for some of my work.
-  if ! command -v google-chrome >/dev/null 2>&1; then
-    echo -e "\n=== Installing Google Chrome ==="
-    tmpdeb="$(mktemp).deb"
-    wget -qO "$tmpdeb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    sudo apt-get install -qq -y "$tmpdeb"
-    rm -f "$tmpdeb"
+# make sure google chrome is installed, since it's required for some of my work.
+if ! command -v google-chrome >/dev/null 2>&1; then
+  echo -e "\n=== Installing Google Chrome ==="
+  tmpdeb="$(mktemp).deb"
+  wget -qO "$tmpdeb" https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  sudo apt-get install -qq -y "$tmpdeb"
+  rm -f "$tmpdeb"
+else
+  echo -e "\n=== Updating Google Chrome ==="
+  sudo apt-get update -qq -y
+  sudo apt-get install -qq -y --only-upgrade google-chrome-stable || true
+fi
+
+if ! command -v /home/linuxbrew/.linuxbrew/bin/brew >/dev/null 2>&1; then
+  if [ -t 0 ]; then
+    echo -e "\n=== Installing brew ==="
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   else
-    echo -e "\n=== Updating Google Chrome ==="
-    sudo apt-get update -qq -y
-    sudo apt-get install -qq -y --only-upgrade google-chrome-stable || true
+    echo -e "\n=== Skipping brew installation because no interactive terminal is available for sudo password entry. ==="
   fi
+fi
+if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  echo -e "\n=== Setting up brew environment ==="
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-  if ! command -v /home/linuxbrew/.linuxbrew/bin/brew >/dev/null 2>&1; then
-    if [ -t 0 ]; then
-      echo -e "\n=== Installing brew ==="
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    else
-      echo -e "\n=== Skipping brew installation because no interactive terminal is available for sudo password entry. ==="
-    fi
-  fi
-  if [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
-    echo -e "\n=== Setting up brew environment ==="
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  echo -e "\n=== Installing brew packages ==="
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
+  xargs -a "$REPO_ROOT"/config/brew-packages.txt brew install --quiet
 
-    echo -e "\n=== Installing brew packages ==="
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv bash)"
-    xargs -a "$REPO_ROOT"/config/brew-packages.txt brew install --quiet
-
-    echo -e "\n=== updating/cleanup brew packages ===\n"
-    brew update && brew upgrade && brew cleanup
-  else
-    echo "Brew installation not found at expected location: /home/linuxbrew/.linuxbrew/bin/brew"
-  fi
+  echo -e "\n=== updating/cleanup brew packages ===\n"
+  brew update && brew upgrade && brew cleanup
+else
+  echo "Brew installation not found at expected location: /home/linuxbrew/.linuxbrew/bin/brew"
 fi
 
 echo -e "\n=== Cleaning up cruft ==="

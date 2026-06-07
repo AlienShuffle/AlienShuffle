@@ -78,7 +78,7 @@ fi
 source ~/.nvm/nvm.sh
 if [ ! "$(nvm --version)" = "$nvmVersion" ]; then
   echo "Updating nvm to $nvmVersion"
-  //echo "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash"
+  #echo "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash"
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash
 fi
 source ~/.nvm/nvm.sh

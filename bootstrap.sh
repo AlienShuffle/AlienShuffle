@@ -92,6 +92,14 @@ echo -e "\n=== Installing npm packages ==="
 xargs -a "$REPO_ROOT"/config/npm-packages.txt npm install -g
 npm outdated -g || npm update -g
 
+# this is likely not right.
+#if [ ! -f "$REPO_ROOT"/config/pip-packages.txt ]; then
+#  echo "Package list not found: $REPO_ROOT/config/pip-packages.txt"
+#  exit 1
+#fi
+#echo -e "\n=== Installing pip packages ==="
+#xargs -a "$REPO_ROOT"/config/pip-packages.txt pip install
+
 if [ ! -f "$REPO_ROOT"/config/vscode-extensions.txt ]; then
   echo "VS Code extensions list not found: $REPO_ROOT/config/vscode-extensions.txt"
   exit 1

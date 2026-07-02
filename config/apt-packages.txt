@@ -11,3 +11,4 @@ procps
 python3
 python3.12-venv
 python3-pip
+wamerican

@@ -69,7 +69,7 @@ echo -e "\n=== Cleaning up cruft ==="
 sudo apt-get autoremove -qq -y
 
 # install/verify NVM, install LTS NPM instance.
-nvmVersion="0.40.5"
+nvmVersion="0.40.6"
 echo -e "\n=== nvm $nvmVersion setup ==="
 if ! command -v ~/.nvm/nvm.sh >/dev/null; then
   echo "initial install of nvm $nvmVersion"

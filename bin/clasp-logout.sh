@@ -1,1 +1,1 @@
-clasp logout -A .clasp.auth "$*"
+clasp logout -A .clasp.auth

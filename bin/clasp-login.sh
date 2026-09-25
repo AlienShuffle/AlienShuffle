@@ -1,1 +1,1 @@
-clasp login -A .clasp.auth "$*"
+clasp login -A .clasp.auth

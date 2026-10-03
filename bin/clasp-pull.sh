@@ -1,1 +1,1 @@
-clasp pull -A .clasp.auth "$*"
+clasp pull -A .clasp.auth

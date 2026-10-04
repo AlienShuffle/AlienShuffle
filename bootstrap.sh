@@ -69,7 +69,7 @@ echo -e "\n=== Cleaning up cruft ==="
 sudo apt-get autoremove -qq -y
 
 # install/verify NVM, install LTS NPM instance.
-nvmVersion="0.40.6"
+nvmVersion="0.40.7"
 echo -e "\n=== nvm $nvmVersion setup ==="
 if ! command -v ~/.nvm/nvm.sh >/dev/null; then
   echo "initial install of nvm $nvmVersion"
@@ -90,7 +90,7 @@ if [ ! -f "$REPO_ROOT"/config/npm-packages.txt ]; then
 fi
 echo -e "\n=== Installing npm packages ==="
 xargs -a "$REPO_ROOT"/config/npm-packages.txt npm install -g
-npm outdated -g || npm update -g
+npm outdated -g && npm update -g
 
 # this is likely not right.
 #if [ ! -f "$REPO_ROOT"/config/pip-packages.txt ]; then

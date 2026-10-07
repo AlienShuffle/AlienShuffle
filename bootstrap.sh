@@ -82,7 +82,13 @@ if [ ! "$(nvm --version)" = "$nvmVersion" ]; then
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$nvmVersion/install.sh | bash
 fi
 source ~/.nvm/nvm.sh
-nvm install --lts
+#nvm install --lts
+nodeVersion="24.19.0"
+echo "Node version before setting default: $(node --version 2>/dev/null)"
+nvm install "$nodeVersion"        # no-op if already installed; also switches to it
+nvm alias default "$nodeVersion"
+nvm use default
+node --version
 
 if [ ! -f "$REPO_ROOT"/config/npm-packages.txt ]; then
   echo "Package list not found: $REPO_ROOT/config/npm-packages.txt"

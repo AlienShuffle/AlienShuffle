@@ -90,10 +90,7 @@ if [ ! -f "$REPO_ROOT"/config/npm-packages.txt ]; then
 fi
 echo -e "\n=== Installing npm packages ==="
 xargs -a "$REPO_ROOT"/config/npm-packages.txt npm install -g
-echo -e "\n=== Checking for outdated npm packages ==="
-npm outdated -g
-echo -e "\n=== Updating npm packages ==="
-npm update -g
+npm outdated -g || npm update -g
 
 # this is likely not right.
 #if [ ! -f "$REPO_ROOT"/config/pip-packages.txt ]; then

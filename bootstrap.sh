@@ -97,7 +97,15 @@ fi
 echo -e "\n=== Installing npm packages ==="
 xargs -a "$REPO_ROOT"/config/npm-packages.txt npm install -g
 echo -e "\n=== Checking for outdated global npm packages ==="
-npm outdated -g
+if npm outdated -g; then
+  :
+else
+  status=$?
+  if [ "$status" -ne 1 ]; then
+    echo "Failed to check outdated global npm packages (exit status $status)." >&2
+    exit "$status"
+  fi
+fi
 echo -e "\n=== Updating global npm packages ==="
 npm update -g
 

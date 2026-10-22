@@ -9,6 +9,12 @@
 # Bootstrapping
 This repository also holds all my bootstrapping scripts for setting up new Linux environments: bash, npm, etc.
 
+The npm stage in [bootstrap.sh](./bootstrap.sh) lists outdated global packages
+before updating them. An `npm outdated -g` exit status of 1 means outdated
+packages were found, so bootstrap continues with updates and the remaining setup.
+Other nonzero statuses from this check, or failures during npm installation or
+updates, stop the script.
+
 ## Steps to initialize a new WSL instance to produce a DevOps environment from a fresh Win11 box
 Prerequisites are documented in `scripts/configure-windows.ps1`
 - If you pull down the script.
